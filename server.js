@@ -12,16 +12,17 @@ app.set('trust proxy', 1); // wajib bila di belakang proxy/hosting agar cookie S
 const allowedOrigins = process.env.CLIENT_ORIGIN?.split(',').map((o) => o.trim()) || []
 
 const corsOptions = {
-    origin: (origin, callback) => {
-        if (!origin) {
-            return callback(null, true)
-        }
+    // origin: (origin, callback) => {
+    //     if (!origin) {
+    //         return callback(null, true)
+    //     }
 
-        if (allowedOrigins.includes(origin)) {
-            return callback(null, true)
-        }
-        return callback(new Error(`Origin ${origin} not allowed by CORS`))
-    },
+    //     if (allowedOrigins.includes(origin)) {
+    //         return callback(null, true)
+    //     }
+    //     return callback(new Error(`Origin ${origin} not allowed by CORS`))
+    // },
+    origin: "https://camp5-frontend-deployment.netlify.app/",
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Token-Mode'],
     credentials: true,
