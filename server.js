@@ -12,10 +12,11 @@ app.set('trust proxy', 1); // wajib bila di belakang proxy/hosting agar cookie S
 const allowedOrigins = process.env.CLIENT_ORIGIN?.split(',').map((o) => o.trim()) || []
 
 const corsOptions = {
-    origin: [
-        "https://camp5-frontend-deployment.vercel.app",
-        "https://camp5-frontend-deployment.netlify.app",
-    ],
+    // origin: [
+    //     "https://camp5-frontend-deployment.vercel.app",
+    //     "https://camp5-frontend-deployment.netlify.app",
+    // ],
+    origin: allowedOrigins,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Token-Mode'],
     credentials: true,
