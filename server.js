@@ -16,6 +16,7 @@ const corsOptions = {
         "https://camp5-frontend-deployment.vercel.app",
         "https://camp5-frontend-deployment.netlify.app",
     ],
+    // origin: allowedOrigins,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Token-Mode'],
     credentials: true,
