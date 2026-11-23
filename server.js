@@ -9,15 +9,17 @@ const app = express();
 
 app.set('trust proxy', 1); // wajib bila di belakang proxy/hosting agar cookie Secure bekerja
 
-const allowedOrigins = (process.env.CLIENT_ORIGIN || 'http://localhost:5173').split(',').map((o) => o.trim().replace(/\/$/, '')).filter(Boolean)
+const allowedOrigins = process.env.CLIENT_ORIGIN?.split(',').map((o) => o.trim()) || []
 
 const corsOptions = {
     origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (!origin) {
             return callback(null, true)
         }
 
-        console.log(origin)
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true)
+        }
         return callback(new Error(`Origin ${origin} not allowed by CORS`))
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
