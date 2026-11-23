@@ -1,0 +1,29 @@
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    product_name VARCHAR(255) NOT NULL,
+    product_slug VARCHAR(255) UNIQUE NOT NULL,
+    stock INT NOT NULL DEFAULT 0,
+    price NUMERIC(10, 2) NOT NULL,
+    deleted_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  role VARCHAR(20) NOT NULL DEFAULT 'user',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE sessions (
+  id UUID PRIMARY KEY,
+  user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  refresh_jti UUID NOT NULL,
+  prev_jti UUID,
+  expires_at TIMESTAMPTZ NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
